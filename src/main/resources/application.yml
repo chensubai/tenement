@@ -18,8 +18,8 @@ spring:
   servlet:
     multipart:
       # 上传文件最大大小
-      max-file-size: 20MB
-      max-request-size: 20MB
+      max-file-size: 200MB
+      max-request-size: 200MB
   # 启用虚拟线程
   threads:
     virtual:
@@ -230,10 +230,11 @@ spring:
             class: javax.net.ssl.SSLSocketFactory
             fallback: false
 qiniu:
-  accessKey: 申请的 AccessKey,AK
-  accessSecretKey: 申请的 SecretKey,SK
-  bucket: 创建的空间名
-  imageUrl: 域名
+  accessKey: uwiuyD4UrUQMCNG1624piwmiEplxbiJUAUbP3FHm
+  accessSecretKey: 4D7afOZxzvILbkhrOUe_y62vW-ZqlBC4euNubVyA
+  bucket: xhorse
+  imageUrl: http://sgnn8ciqc.hb-bkt.clouddn.com/
+  tokenExp: 3600
 --- #---------------------自定义配置----------------------------
 equestrian:
   # 跨域配置

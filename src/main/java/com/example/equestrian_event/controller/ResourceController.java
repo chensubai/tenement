@@ -8,10 +8,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 前台门户-资源(图片/视频/文档)模块 API 控制器
@@ -26,7 +29,6 @@ import java.io.IOException;
 public class ResourceController {
 
     private final ResourceService resourceService;
-
     /**
      * 获取图片验证码接口
      */
@@ -40,10 +42,9 @@ public class ResourceController {
      * 图片上传接口
      */
     @Operation(summary = "图片上传接口")
-    @PostMapping("/image")
-    RestResp<String> uploadImage(
-        @Parameter(description = "上传文件") @RequestParam("file") MultipartFile file) {
-        return resourceService.uploadImage(file);
+    @PostMapping(value = "/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    RestResp<Map<String, List<String>>> uploadImages(@RequestParam("files") MultipartFile[] multipartFile) {
+        return resourceService.uploadImages(multipartFile);
     }
 
 }

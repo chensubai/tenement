@@ -6,6 +6,7 @@ import com.example.equestrian_event.core.common.constant.ErrorCodeEnum;
 import com.example.equestrian_event.core.common.resp.RestResp;
 import com.example.equestrian_event.core.constant.DatabaseConsts;
 import com.example.equestrian_event.core.constant.SystemConfigConsts;
+import com.example.equestrian_event.core.util.ImageUtils;
 import com.example.equestrian_event.core.util.JwtUtils;
 import com.example.equestrian_event.dao.mapper.UserInfoMapper;
 import com.example.equestrian_event.dao.model.UserInfo;
@@ -40,6 +41,8 @@ public class UserServiceImpl implements UserService {
     private final VerifyCodeManager verifyCodeManager;
 
     private final JwtUtils jwtUtils;
+
+    private final ImageUtils imageUtils;
 
     @Override
     public RestResp<UserRegisterRespDto> register(UserRegisterReqDto dto) {
@@ -121,9 +124,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public RestResp<UserInfoRespDto> getUserInfo(Long userId) {
         UserInfo userInfo = userInfoMapper.selectById(userId);
+        String timestampedHeadUrl = imageUtils.getOSSToken(userInfo.getHeadUrl());
         return RestResp.ok(UserInfoRespDto.builder()
             .nickName(userInfo.getNickName())
-            .headUrl(userInfo.getHeadUrl())
+            .headUrl(timestampedHeadUrl)
             .build());
     }
 }

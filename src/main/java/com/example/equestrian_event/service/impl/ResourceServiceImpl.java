@@ -1,16 +1,20 @@
 package com.example.equestrian_event.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.example.equestrian_event.core.common.constant.ErrorCodeEnum;
 import com.example.equestrian_event.core.common.exception.BusinessException;
 import com.example.equestrian_event.core.common.resp.RestResp;
 import com.example.equestrian_event.core.constant.SystemConfigConsts;
+import com.example.equestrian_event.core.util.ImageUtils;
 import com.example.equestrian_event.dto.resp.ImgVerifyCodeRespDto;
 import com.example.equestrian_event.manager.redis.VerifyCodeManager;
 import com.example.equestrian_event.service.ResourceService;
+import io.netty.handler.codec.http.HttpResponseStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +25,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -35,7 +41,8 @@ import java.util.Objects;
 public class ResourceServiceImpl implements ResourceService {
 
     private final VerifyCodeManager verifyCodeManager;
-
+    @Autowired
+    private ImageUtils imageUtils;
     @Value("${equestrian.file.upload.path}")
     private String fileUploadPath;
 
@@ -47,33 +54,13 @@ public class ResourceServiceImpl implements ResourceService {
             .img(verifyCodeManager.genImgVerifyCode(sessionId))
             .build());
     }
-
-    @SneakyThrows
     @Override
-    public RestResp<String> uploadImage(MultipartFile file) {
-        LocalDateTime now = LocalDateTime.now();
-        String savePath =
-            SystemConfigConsts.IMAGE_UPLOAD_DIRECTORY
-                + now.format(DateTimeFormatter.ofPattern("yyyy")) + File.separator
-                + now.format(DateTimeFormatter.ofPattern("MM")) + File.separator
-                + now.format(DateTimeFormatter.ofPattern("dd"));
-        String oriName = file.getOriginalFilename();
-        assert oriName != null;
-        String saveFileName = IdWorker.get32UUID() + oriName.substring(oriName.lastIndexOf("."));
-        File saveFile = new File(fileUploadPath + savePath, saveFileName);
-        if (!saveFile.getParentFile().exists()) {
-            boolean isSuccess = saveFile.getParentFile().mkdirs();
-            if (!isSuccess) {
-                throw new BusinessException(ErrorCodeEnum.USER_UPLOAD_FILE_ERROR);
-            }
+    public RestResp<Map<String, List<String>>> uploadImages(MultipartFile[] multipartFiles) {
+        if(ObjectUtils.isEmpty(multipartFiles)){
+            throw new BusinessException(ErrorCodeEnum.USER_UPLOAD_FILE_ERROR);
         }
-        file.transferTo(saveFile);
-        if (Objects.isNull(ImageIO.read(saveFile))) {
-            // 上传的文件不是图片
-            Files.delete(saveFile.toPath());
-            throw new BusinessException(ErrorCodeEnum.USER_UPLOAD_FILE_TYPE_NOT_MATCH);
-        }
-        return RestResp.ok(savePath + File.separator + saveFileName);
+        Map<String, List<String>> uploadImagesUrl = imageUtils.uploadImages(multipartFiles);
+        return RestResp.ok(uploadImagesUrl);
     }
 
 }
