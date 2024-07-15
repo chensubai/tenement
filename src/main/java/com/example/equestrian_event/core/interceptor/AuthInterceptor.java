@@ -41,14 +41,17 @@ public class AuthInterceptor implements HandlerInterceptor {
         Object handler) throws Exception {
         // 获取登录 JWT
         String token = request.getHeader(SystemConfigConsts.HTTP_AUTH_HEADER_NAME);
+        System.out.println(token);
+
 
         // 获取请求的 URI
         String requestUri = request.getRequestURI();
-
+        System.out.println(requestUri);
         // 根据请求的 URI 得到认证策略
         String subUri = requestUri.substring(ApiRouterConsts.API_URL_PREFIX.length() + 1);
         String systemName = subUri.substring(0, subUri.indexOf("/"));
         String authStrategyName = String.format("%sAuthStrategy", systemName);
+        System.out.println(authStrategyName);
 
         // 开始认证
         try {
