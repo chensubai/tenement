@@ -27,10 +27,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * 会员模块 服务实现类
- *
- * @author xiongxiaoyang
- * @date 2022/5/17
+ * 用户模块 服务实现类
  */
 @Service
 @RequiredArgsConstructor

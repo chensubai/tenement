@@ -2,31 +2,28 @@ package com.example.equestrian_event.core.common.constant;
 
 /**
  * AMQP 相关常量
- *
- * @author xiongxiaoyang
- * @date 2022/5/25
  */
 public class AmqpConsts {
 
     /**
-     * 小说信息改变 MQ
+     *信息改变 MQ
      */
-    public static class BookChangeMq {
+    public static class HorseMq {
 
         /**
-         * 小说信息改变交换机
+         * 信息改变交换机
          */
-        public static final String EXCHANGE_NAME = "EXCHANGE-BOOK-CHANGE";
+        public static final String EXCHANGE_NAME = "EXCHANGE-HORSE-CHANGE";
 
         /**
-         * Elasticsearch book 索引更新的队列
+         * Elasticsearch索引更新的队列
          */
-        public static final String QUEUE_ES_UPDATE = "QUEUE-ES-BOOK-UPDATE";
+        public static final String QUEUE_ES_UPDATE = "QUEUE-ES-HORSE-UPDATE";
 
         /**
-         * Redis book 缓存更新的队列
+         * Redis 缓存更新的队列
          */
-        public static final String QUEUE_REDIS_UPDATE = "QUEUE-REDIS-BOOK-UPDATE";
+        public static final String QUEUE_REDIS_UPDATE = "QUEUE-REDIS-HORSE-UPDATE";
 
     }
 

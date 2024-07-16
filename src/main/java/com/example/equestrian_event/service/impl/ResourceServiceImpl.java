@@ -31,9 +31,6 @@ import java.util.Objects;
 
 /**
  * 资源（图片/视频/文档）相关服务实现类
- *
- * @author xiongxiaoyang
- * @date 2022/5/17
  */
 @Service
 @RequiredArgsConstructor

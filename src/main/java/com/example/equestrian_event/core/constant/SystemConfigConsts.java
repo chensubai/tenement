@@ -2,9 +2,6 @@ package com.example.equestrian_event.core.constant;
 
 /**
  * 系统配置相关常量
- *
- * @author xiongxiaoyang
- * @date 2022/5/12
  */
 public class SystemConfigConsts {
 
@@ -21,22 +18,6 @@ public class SystemConfigConsts {
      * 前台门户系统标识
      */
     public static final String NOVEL_FRONT_KEY = "front";
-
-    /**
-     * 作家管理系统标识
-     */
-    public static final String NOVEL_AUTHOR_KEY = "author";
-
-    /**
-     * 后台管理系统标识
-     */
-    public static final String NOVEL_ADMIN_KEY = "admin";
-
-    /**
-     * 图片上传目录
-     */
-    public static final String IMAGE_UPLOAD_DIRECTORY = "/image/";
-
     /**
      * 常量类实例化异常信息
      */

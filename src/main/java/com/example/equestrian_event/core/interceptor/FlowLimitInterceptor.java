@@ -28,9 +28,6 @@ import java.util.List;
 
 /**
  * 流量限制 拦截器：实现接口防刷和限流
- *
- * @author xiongxiaoyang
- * @date 2022/6/1
  */
 @Component
 @RequiredArgsConstructor

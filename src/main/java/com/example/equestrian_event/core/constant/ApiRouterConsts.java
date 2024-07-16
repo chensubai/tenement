@@ -2,9 +2,6 @@ package com.example.equestrian_event.core.constant;
 
 /**
  * API 路由常量
- *
- * @author xiongxiaoyang
- * @date 2022/5/12
  */
 public class ApiRouterConsts {
 

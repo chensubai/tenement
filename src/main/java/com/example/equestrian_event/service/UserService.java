@@ -9,10 +9,7 @@ import com.example.equestrian_event.dto.resp.UserLoginRespDto;
 import com.example.equestrian_event.dto.resp.UserRegisterRespDto;
 
 /**
- * 会员模块 服务类
- *
- * @author xiongxiaoyang
- * @date 2022/5/17
+ * 用户模块 服务类
  */
 public interface UserService {
 

@@ -1,16 +1,12 @@
 package com.example.equestrian_event.dto.req;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 /**
  * 用户信息更新 请求DTO
- * @author xiongxiaoyang
- * @date 2022/5/17
  */
 @Data
 public class UserInfoUptReqDto {

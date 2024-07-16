@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 /**
- * 前台门户系统 认证授权策略
- *
- * @author xiongxiaoyang
- * @date 2022/5/18
+ * 前端系统 认证授权策略
  */
 @Component
 @RequiredArgsConstructor

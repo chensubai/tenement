@@ -10,9 +10,6 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 
 /**
  * AMQP 消息管理类
- *
- * @author xiongxiaoyang
- * @date 2022/5/25
  */
 @Component
 @RequiredArgsConstructor
@@ -24,11 +21,11 @@ public class AmqpMsgManager {
     private boolean amqpEnabled;
 
     /**
-     * 发送小说信息改变消息
+     * 发送马信息改变消息
      */
     public void sendBookChangeMsg(Long bookId) {
         if (amqpEnabled) {
-            sendAmqpMessage(amqpTemplate, AmqpConsts.BookChangeMq.EXCHANGE_NAME, null, bookId);
+            sendAmqpMessage(amqpTemplate, AmqpConsts.HorseMq.EXCHANGE_NAME, null, bookId);
         }
     }
 

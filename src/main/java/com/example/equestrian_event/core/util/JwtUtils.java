@@ -11,13 +11,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.Objects;
 
 /**
  * JWT 工具类
- *
- * @author xiongxiaoyang
- * @date 2022/5/17
  */
 @ConditionalOnProperty("equestrian.jwt.secret")
 @Component
@@ -29,7 +27,11 @@ public class JwtUtils {
      */
     @Value("${equestrian.jwt.secret}")
     private String secret;
-
+    /**
+     * 注入JWT过期时间（秒）
+     */
+    @Value("${equestrian.jwt.expiration}")
+    private long expiration;
     /**
      * 定义系统标识头常量
      */
@@ -44,10 +46,11 @@ public class JwtUtils {
      */
     public String generateToken(Long uid, String systemKey) {
         return Jwts.builder()
-            .setHeaderParam(HEADER_SYSTEM_KEY, systemKey)
-            .setSubject(uid.toString())
-            .signWith(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)))
-            .compact();
+                .setHeaderParam(HEADER_SYSTEM_KEY, systemKey)
+                .setSubject(uid.toString())
+                .setExpiration(new Date(System.currentTimeMillis() + expiration * 1000)) // 设置过期时间
+                .signWith(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)))
+                .compact();
     }
 
     /**
@@ -67,6 +70,11 @@ public class JwtUtils {
             // OK, we can trust this JWT
             // 判断该 JWT 是否属于指定系统
             if (Objects.equals(claimsJws.getHeader().get(HEADER_SYSTEM_KEY), systemKey)) {
+                Date expiration = claimsJws.getBody().getExpiration();
+                if (expiration != null && !new Date().before(expiration)) {
+                    // 令牌已过期
+                    return null;
+                }
                 return Long.parseLong(claimsJws.getBody().getSubject());
             }
         } catch (JwtException e) {

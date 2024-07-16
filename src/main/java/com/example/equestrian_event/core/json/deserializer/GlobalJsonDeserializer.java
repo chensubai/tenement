@@ -10,9 +10,6 @@ import java.io.IOException;
 
 /**
  * JSON 全局反序列化器
- *
- * @author xiongxiaoyang
- * @date 2022/5/21
  */
 @JsonComponent
 public class GlobalJsonDeserializer {

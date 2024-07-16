@@ -11,9 +11,6 @@ import java.util.List;
 
 /**
  * 用户模块 DAO管理类
- *
- * @author xiongxiaoyang
- * @date 2022/5/20
  */
 @Component
 @RequiredArgsConstructor

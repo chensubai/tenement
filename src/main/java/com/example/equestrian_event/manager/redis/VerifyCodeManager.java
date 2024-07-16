@@ -13,9 +13,6 @@ import java.util.Objects;
 
 /**
  * 验证码 管理类
- *
- * @author xiongxiaoyang
- * @date 2022/5/12
  */
 @Component
 @RequiredArgsConstructor

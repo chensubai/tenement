@@ -21,9 +21,6 @@ import java.util.Map;
 
 /**
  * 缓存配置类
- *
- * @author xiongxiaoyang
- * @date 2022/5/12
  */
 @Configuration
 public class CacheConfig {

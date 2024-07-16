@@ -5,7 +5,6 @@ import com.example.equestrian_event.core.constant.ApiRouterConsts;
 import  com.example.equestrian_event.dto.resp.ImgVerifyCodeRespDto;
 import  com.example.equestrian_event.service.ResourceService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -17,12 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 前台门户-资源(图片/视频/文档)模块 API 控制器
- *
- * @author xiongxiaoyang
- * @date 2022/5/17
+ * 资源模块 api 控制器
  */
-@Tag(name = "ResourceController", description = "前台门户-资源模块")
+@Tag(name = "ResourceController", description = "资源模块")
 @RestController
 @RequestMapping(ApiRouterConsts.API_FRONT_RESOURCE_URL_PREFIX)
 @RequiredArgsConstructor
