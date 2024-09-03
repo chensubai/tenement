@@ -26,6 +26,7 @@
         <spring-boot-admin.version>3.0.0-M1</spring-boot-admin.version>
         <springdoc-openapi.version>2.5.0</springdoc-openapi.version>
         <qiniu.version>7.15.1</qiniu.version>
+        <weixin-java-miniapp.version>4.6.0</weixin-java-miniapp.version>
     </properties>
 
     <dependencies>
@@ -202,6 +203,12 @@
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>
             <version>${qiniu.version}</version>
+        </dependency>
+        <!--微信小程序依赖-->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-miniapp</artifactId>
+            <version>${weixin-java-miniapp.version}</version>
         </dependency>
     </dependencies>
 
